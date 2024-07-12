@@ -26,14 +26,13 @@ jobs:
           path: ${{github.repository}}
       - name: Update Sprint Planning
         run: |
-          cd $GITHUB_WORKSPACE/${{github.repository}}
-          RETROSPECTIVE_FILES=$(find wiki -type f -name "Sprint-Retrospective*.md")
-          PLANNING_FILE="wiki/Sprint-Planning.md"
+          cd $GITHUB_WORKSPACE/${{github.repository}}/wiki
+          RETROSPECTIVE_FILES=$(find . -type f -name "Sprint-Retrospective*.md")
+          PLANNING_FILE="Sprint-Planning.md"
 
           echo "# Sprint Planning" > "$PLANNING_FILE"
-          echo $RETROSPECTIVE_FILES
           for file in $RETROSPECTIVE_FILES; do
-            echo "- [$(basename "$file")]($(dirname "$file")/$(basename "$file"))" >> "$PLANNING_FILE"
+          echo "- [$(basename "$file")]($(basename "$file" .md))" >> "$PLANNING_FILE"
           done
       - name: Checkout Wiki
         uses: actions/checkout@v4
