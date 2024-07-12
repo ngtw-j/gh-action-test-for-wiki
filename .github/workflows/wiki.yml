@@ -31,6 +31,7 @@ jobs:
           PLANNING_FILE="${{github.repository}}/wiki/Sprint-Planning.md"
 
           echo "# Sprint Planningg" > "$PLANNING_FILE"
+          echo $RETROSPECTIVE_FILES
           for file in $RETROSPECTIVE_FILES; do
             echo "- [$(basename "$file")]($(dirname "$file")/$(basename "$file"))" >> "$PLANNING_FILE"
           done
