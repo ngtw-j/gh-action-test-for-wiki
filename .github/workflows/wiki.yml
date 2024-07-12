@@ -14,7 +14,7 @@ concurrency:
 permissions:
   contents: write
 
-jobs:      
+jobs:
   wiki:
     name: Publish to GitHub Wiki
     runs-on: ubuntu-latest
@@ -27,8 +27,8 @@ jobs:
       - name: Update Sprint Planning
         run: |
           TODAY=$(date +'%d-%m-%Y')
-          RETROSPECTIVE_FILES=$(find wiki -type f -name "Sprint-Retrospective-${TODAY}*.md")
-          PLANNING_FILE="wiki/Sprint-Planning.md"
+          RETROSPECTIVE_FILES=$(find ${{github.repository}}/wiki -type f -name "Sprint-Retrospective-${TODAY}*.md")
+          PLANNING_FILE="${{github.repository}}/wiki/Sprint-Planning.md"
 
           echo "# Sprint Planningg" > "$PLANNING_FILE"
           for file in $RETROSPECTIVE_FILES; do
